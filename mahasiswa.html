@@ -5,7 +5,6 @@
 
 <!doctype html>
 <html lang="en">
-  z
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,39 +30,27 @@
         <section class="announcement">
           <p id="announcement-header">Pengumuman Terbaru</p>
           <div class="search-wrapper">
-            <label for="search-title">Cari Judul</label>
+            <label for="search-colleges">Cari Mahasiswa</label>
             <input
               type="text"
-              name="search-title"
-              id="search-title"
-              placeholder="Cari Judul Pengumuman"
+              name="search-colleges"
+              id="search-colleges"
+              placeholder="Cari Mahasiswa"
             />
-            <button type="button">Cari Judul</button>
           </div>
         </section>
 
-        <section class="announcement-list">
-          <div class="announcement-item">
-            <h1>Judul Pengumuman 1</h1>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum,
-              consequuntur.
+        <section class="wrapper-data-college">
+          <section class="detail-profile-college">
+            <div class="wrapper-profile-image">
+              <img src="./default-profile.jpg" alt="" />
+            </div>
+            <h1 class="detail-name-college">Arjun Samudera Ahli Fikri</h1>
+            <p class="description-college">
+              Teknik Informatika | Umur : 20 | IPK : 4.0
             </p>
-          </div>
-          <div class="announcement-item">
-            <h1>Judul Pengumuman 2</h1>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum,
-              consequuntur.
-            </p>
-          </div>
-          <div class="announcement-item">
-            <h1>Judul Pengumuman 3</h1>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum,
-              consequuntur.
-            </p>
-          </div>
+          </section>
+          <section class="announcement-list"></section>
         </section>
         <footer>
           <section id="about-apps">
@@ -75,6 +62,7 @@
         </footer>
       </main>
     </div>
-    <script src="./main.js"></script>
+    <script src="./data.js"></script>
+    <script src="./colleges.js"></script>
   </body>
 </html>

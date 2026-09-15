@@ -1,5 +1,3 @@
 /** @format */
 
-const { colleges } = require("./data");
-
-console.log(colleges);
+console.log("Data Mahasiswa : ", colleges);
