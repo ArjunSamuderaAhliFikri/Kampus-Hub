@@ -40,7 +40,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           />
         )}
         <aside
-          className={`fixed inset-y-0 left-0 z-50 h-screen ${isShowSidebar ? "translate-x-0" : "-translate-x-full"} bg-emerald-600 transition-transform duration-300 w-3/4 max-w-xs px-8 py-6 rounded-tr-xl rounded-br-xl lg:static lg:z-auto lg:w-1/6 lg:max-w-none lg:translate-x-0`}
+          className={`fixed inset-y-0 left-0 z-50 h-screen ${isShowSidebar ? "translate-x-0" : "-translate-x-full"} bg-emerald-600 transition-transform duration-300 w-3/4 max-w-xs px-8 py-6 rounded-tr-xl rounded-br-xl lg:w-1/6 lg:max-w-none lg:translate-x-0`}
         >
           <div className="flex items-center justify-between gap-x-4">
             <div className="flex items-center gap-x-4">
@@ -113,7 +113,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             </ul>
           </section>
         </aside>
-        <div className="min-w-0 flex-1 lg:px-8 lg:py-6 px-4 py-6">
+        <div className="min-w-0 flex-1 lg:ml-[16.666667%] lg:px-8 lg:py-6 px-4 py-6">
           <nav className="relative flex items-center gap-x-4 w-full">
             <button
               type="button"
@@ -138,7 +138,13 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
               <ul className="flex flex-col gap-y-5">
                 <li className="flex items-center gap-x-4 cursor-pointer transition-all duration-150 hover:bg-slate-200/20 rounded-lg border-b-2 border-slate-200">
                   <div className="flex flex-col justify-center items-center gap-y-4 w-full h-24">
-                    <div className="size-12 rounded-full bg-slate-300"></div>
+                    <div className="size-12 rounded-full overflow-hidden">
+                      <img
+                        className="block size-full object-cover"
+                        src="/img/default-profile.jpg"
+                        alt=""
+                      />
+                    </div>
                     <span className="text-[11px]">
                       Arjun Samudera Ahli Fikri
                     </span>
@@ -184,13 +190,19 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 <div className="w-0.5 h-8 rounded-full bg-slate-600"></div>
 
                 <div className="flex items-center gap-x-2">
-                  <div className="size-11 rounded-full bg-slate-400"></div>
+                  <div className="size-11 rounded-full overflow-hidden">
+                    <img
+                      className="block size-full object-cover"
+                      src="/img/default-profile.jpg"
+                      alt=""
+                    />
+                  </div>
                   <h1 className="text-sm font-normal">Arjun Samudera</h1>
                 </div>
               </div>
             </div>
           </nav>
-          <main className="py-4">{children}</main>
+          <main className="py-4 overflow-hidden">{children}</main>
         </div>
       </div>
     </>
