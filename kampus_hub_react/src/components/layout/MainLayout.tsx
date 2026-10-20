@@ -202,7 +202,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
           </nav>
-          <main className="py-4 overflow-hidden">{children}</main>
+          <main className="py-4">{children}</main>
         </div>
       </div>
     </>

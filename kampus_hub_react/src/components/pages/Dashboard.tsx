@@ -12,7 +12,7 @@ import {
 export default function Dashboard() {
   return (
     <>
-      <section className="grid grid-cols-[1fr_350px] gap-x-4 overflow-hidden">
+      <section className="grid grid-cols-[1fr_350px] gap-x-4">
         <section className="flex flex-col gap-y-6">
           <section className="w-full h-52 bg-gradient-to-br from-emerald-700 to-emerald-500 rounded-lg px-6 py-4 text-slate-300">
             <span>Kampus Hub</span>
