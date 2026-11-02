@@ -22,7 +22,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   const [isShowSidebar, setIsShowSidebar] = useState<boolean>(false);
 
   const handleToggleSidebar = () => {
-    setIsShowSidebar((isShown) => !isShown);
+    setIsShowSidebar(false);
   };
 
   const handleToggleSidebarProfile = () => {
@@ -30,7 +30,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   };
   return (
     <>
-      <div className="relative flex w-full min-h-screen bg-slate-200 overflow-x-hidden">
+      <div className="relative flex w-full min-h-screen min-w-[1200px] bg-slate-200">
         {isShowSidebar && (
           <button
             type="button"

@@ -22,7 +22,7 @@ export default function CollegePage() {
           <tbody>
             {CollegeData.length > 0 &&
               CollegeData.map((college) => (
-                <TableRowComponent college={college} />
+                <TableRowComponent college={{ id: college.id }} />
               ))}
           </tbody>
         </table>
