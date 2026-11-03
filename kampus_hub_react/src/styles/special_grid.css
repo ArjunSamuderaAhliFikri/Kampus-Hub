@@ -3,6 +3,24 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 12px;
-
   height: 70dvh;
+}
+
+@media screen and (max-width: 640px) {
+  .grid-primary-news {
+    width: fit-content;
+    display: flex;
+    gap: 12px;
+    animation: slideCarousel 60s linear infinite;
+  }
+}
+
+@keyframes slideCarousel {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-85%);
+  }
 }

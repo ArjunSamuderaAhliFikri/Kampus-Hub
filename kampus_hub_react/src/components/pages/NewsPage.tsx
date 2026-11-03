@@ -35,132 +35,147 @@ export default function NewsPage() {
   }, [primaryNews, otherNewsData]);
 
   return (
-    <section className="rounded-lg p-6 overflow-y-auto overflow-x-hidden">
+    <section className="h-fit rounded-lg py-4 overflow-y-auto overflow-x-hidden">
       <h1 className="font-semibold text-slate-900 text-lg mb-4">
         Pantau Berita Lagi Hangat
       </h1>
-      <section id="grid-primary-news" className="grid-primary-news">
-        <div className="relative col-span-2 bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
-          <img
-            className="block w-full h-full object-cover absolute inset-0"
-            src="/img/images.jpg"
-          />
 
-          <section
-            id="title-news"
-            className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900 to-transparent w-full"
-          >
-            <h1 className="font-semibold text-lg text-slate-100/90">
-              {primaryNews.length > 0 && primaryNews[0]?.title.substring(0, 32)}
-            </h1>
-            <p className="text-sm text-slate-300">
-              {primaryNews.length > 0 && primaryNews[0]?.body.substring(0, 32)}
-              ...
-            </p>
-          </section>
-        </div>
-        <div className="relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
-          <img
-            className="block w-full h-full object-cover absolute inset-0"
-            src="/img/images.jpg"
-          />
+      <section id="carousel-container" className="w-full overflow-x-hidden">
+        <section id="grid-primary-news" className="grid-primary-news">
+          <div className="w-72 lg:w-full relative lg:col-span-2 bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
+            <img
+              className="block w-full h-full object-cover absolute inset-0"
+              src="/img/images.jpg"
+            />
 
-          <section
-            id="title-news"
-            className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
-          >
-            <h1 className="font-semibold text-lg text-slate-100/90">
-              {primaryNews.length > 0 && primaryNews[1]?.title.substring(0, 32)}
-            </h1>
-            <p className="text-sm text-slate-300">
-              {primaryNews.length > 0 && primaryNews[1]?.body.substring(0, 32)}
-              ...
-            </p>
-          </section>
-        </div>
-        <div className="relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
-          <img
-            className="block w-full h-full object-cover absolute inset-0"
-            src="/img/images.jpg"
-          />
+            <section
+              id="title-news"
+              className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900 to-transparent w-full"
+            >
+              <h1 className="font-semibold text-lg text-slate-100/90">
+                {primaryNews.length > 0 &&
+                  primaryNews[0]?.title.substring(0, 32)}
+              </h1>
+              <p className="text-sm text-slate-300">
+                {primaryNews.length > 0 &&
+                  primaryNews[0]?.body.substring(0, 32)}
+                ...
+              </p>
+            </section>
+          </div>
+          <div className="w-72 lg:w-full relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
+            <img
+              className="block w-full h-full object-cover absolute inset-0"
+              src="/img/images.jpg"
+            />
 
-          <section
-            id="title-news"
-            className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
-          >
-            <h1 className="font-semibold text-lg text-slate-100/90">
-              {primaryNews.length > 0 && primaryNews[2]?.title.substring(0, 32)}
-            </h1>
-            <p className="text-sm text-slate-300">
-              {primaryNews.length > 0 && primaryNews[2]?.body.substring(0, 32)}
-              ...
-            </p>
-          </section>
-        </div>
-        <div className="relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
-          <img
-            className="block w-full h-full object-cover absolute inset-0"
-            src="/img/images.jpg"
-          />
-          <section
-            id="title-news"
-            className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
-          >
-            <h1 className="font-semibold text-lg text-slate-100/90">
-              {primaryNews.length > 0 && primaryNews[3]?.title.substring(0, 32)}
-            </h1>
-            <p className="text-sm text-slate-300">
-              {primaryNews.length > 0 && primaryNews[3]?.body.substring(0, 32)}
-              ...
-            </p>
-          </section>
-        </div>
-        <div className="relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
-          <img
-            className="block w-full h-full object-cover absolute inset-0"
-            src="/img/images.jpg"
-          />
+            <section
+              id="title-news"
+              className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
+            >
+              <h1 className="font-semibold text-lg text-slate-100/90">
+                {primaryNews.length > 0 &&
+                  primaryNews[1]?.title.substring(0, 32)}
+              </h1>
+              <p className="text-sm text-slate-300">
+                {primaryNews.length > 0 &&
+                  primaryNews[1]?.body.substring(0, 32)}
+                ...
+              </p>
+            </section>
+          </div>
+          <div className="w-72 lg:w-full relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
+            <img
+              className="block w-full h-full object-cover absolute inset-0"
+              src="/img/images.jpg"
+            />
 
-          <section
-            id="title-news"
-            className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
-          >
-            <h1 className="font-semibold text-lg text-slate-100/90">
-              {primaryNews.length > 0 && primaryNews[4]?.title.substring(0, 32)}
-            </h1>
-            <p className="text-sm text-slate-300">
-              {primaryNews.length > 0 && primaryNews[4]?.body.substring(0, 32)}
-              ...
-            </p>
-          </section>
-        </div>
-        <div className="relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer col-span-2">
-          <img
-            className="block w-full h-full object-cover absolute inset-0"
-            src="/img/images.jpg"
-          />
+            <section
+              id="title-news"
+              className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
+            >
+              <h1 className="font-semibold text-lg text-slate-100/90">
+                {primaryNews.length > 0 &&
+                  primaryNews[2]?.title.substring(0, 32)}
+              </h1>
+              <p className="text-sm text-slate-300">
+                {primaryNews.length > 0 &&
+                  primaryNews[2]?.body.substring(0, 32)}
+                ...
+              </p>
+            </section>
+          </div>
+          <div className="w-72 lg:w-full relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
+            <img
+              className="block w-full h-full object-cover absolute inset-0"
+              src="/img/images.jpg"
+            />
+            <section
+              id="title-news"
+              className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
+            >
+              <h1 className="font-semibold text-lg text-slate-100/90">
+                {primaryNews.length > 0 &&
+                  primaryNews[3]?.title.substring(0, 32)}
+              </h1>
+              <p className="text-sm text-slate-300">
+                {primaryNews.length > 0 &&
+                  primaryNews[3]?.body.substring(0, 32)}
+                ...
+              </p>
+            </section>
+          </div>
+          <div className="w-72 lg:w-full relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer">
+            <img
+              className="block w-full h-full object-cover absolute inset-0"
+              src="/img/images.jpg"
+            />
 
-          <section
-            id="title-news"
-            className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
-          >
-            <h1 className="font-semibold text-lg text-slate-100/90">
-              {primaryNews.length > 0 && primaryNews[5]?.title.substring(0, 32)}
-            </h1>
-            <p className="text-sm text-slate-300">
-              {primaryNews.length > 0 && primaryNews[5]?.body.substring(0, 32)}
-              ...
-            </p>
-          </section>
-        </div>
+            <section
+              id="title-news"
+              className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
+            >
+              <h1 className="font-semibold text-lg text-slate-100/90">
+                {primaryNews.length > 0 &&
+                  primaryNews[4]?.title.substring(0, 32)}
+              </h1>
+              <p className="text-sm text-slate-300">
+                {primaryNews.length > 0 &&
+                  primaryNews[4]?.body.substring(0, 32)}
+                ...
+              </p>
+            </section>
+          </div>
+          <div className="w-72 lg:w-full relative bg-slate-200/90 rounded-lg overflow-hidden cursor-pointer lg:col-span-2">
+            <img
+              className="block w-full h-full object-cover absolute inset-0"
+              src="/img/images.jpg"
+            />
+
+            <section
+              id="title-news"
+              className="absolute z-10 bottom-0 left-0 px-6 pb-6 bg-gradient-to-t from-slate-900/60 to-transparent w-full"
+            >
+              <h1 className="font-semibold text-lg text-slate-100/90">
+                {primaryNews.length > 0 &&
+                  primaryNews[5]?.title.substring(0, 32)}
+              </h1>
+              <p className="text-sm text-slate-300">
+                {primaryNews.length > 0 &&
+                  primaryNews[5]?.body.substring(0, 32)}
+                ...
+              </p>
+            </section>
+          </div>
+        </section>
       </section>
 
-      <section className="mt-6">
+      <section className="mt-6 md:w-full">
         <h1 className="font-semibold text-slate-900 text-lg mb-4">
           Berita Lainnya
         </h1>
 
-        <ul className="w-full flex flex-col items-center gap-y-3 bg-slate-200">
+        <ul className="flex flex-col items-center justify-center gap-y-3 bg-slate-200">
           {otherNewsData.length > 0 &&
             otherNewsData.map((data: NewsDataType) => (
               <OtherNews key={data.id} otherNewsData={data} />
@@ -188,17 +203,17 @@ function OtherNews({ otherNewsData }: OtherNewsProps) {
           className="absolute top-1/2 -translate-y-1/2 right-0 z-10 px-8 w-full flex justify-between items-center"
         >
           <div className="flex flex-col gap-y-1">
-            <h1 className="text-slate-100 font-medium text-md">
+            <h1 className="text-slate-100 font-medium text-sm lg:text-md">
               {otherNewsData.title.substring(0, 20)}
             </h1>
-            <p className="text-slate-300 text-xs">
+            <p className="text-slate-300 text-[10px] lg:text-xs">
               {otherNewsData.body.substring(0, 25)}
             </p>
           </div>
 
           <button
             type="button"
-            className="text-slate-300 bg-slate-900/80 px-4 py-2 text-xs rounded-lg cursor-pointer text-md font-medium hover:bg-slate-800/50"
+            className="text-slate-300 bg-slate-900/80 px-4 py-2 text-xs rounded-lg cursor-pointer text-xs lg:text-md font-medium hover:bg-slate-800/50"
           >
             Baca Sekarang
           </button>

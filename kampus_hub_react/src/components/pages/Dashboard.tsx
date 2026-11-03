@@ -12,14 +12,14 @@ import {
 export default function Dashboard() {
   return (
     <>
-      <section className="grid grid-cols-[1fr_350px] gap-x-4">
+      <section className="lg:grid grid-cols-[1fr_350px] flex flex-col-reverse gap-x-4">
         <section className="flex flex-col gap-y-6">
           <section className="w-full h-52 bg-gradient-to-br from-emerald-700 to-emerald-500 rounded-lg px-6 py-4 text-slate-300">
             <span>Kampus Hub</span>
-            <h1 className="text-3xl mt-3 font-medium text-slate-100">
+            <h1 className="lg:text-3xl text-lg mt-3 font-medium text-slate-100">
               Selamat Datang di Kampus Hub!
             </h1>
-            <h2 className="text-md mt-1 text-slate-300">
+            <h2 className="lg:text-md text-sm mt-1 text-slate-300">
               Pantau semua informasi kampus disini
             </h2>
 
@@ -33,7 +33,7 @@ export default function Dashboard() {
           </section>
 
           <section>
-            <div className="flex justify-between items-center gap-x-3">
+            <div className="lg:flex justify-between items-center grid grid-cols-2 grid-rows-2 gap-4 gap-x-3">
               <div
                 id="card-dashboard"
                 className="w-full p-3 rounded-lg bg-slate-100"
@@ -109,17 +109,19 @@ export default function Dashboard() {
             </div>
           </section>
 
-          <section className="grid grid-cols-3 gap-x-4">
+          <section className="grid lg:grid-cols-3 grid-cols-1 gap-x-4">
             <NewsCard />
             <NewsCard />
             <NewsCard />
           </section>
         </section>
-        <section className="bg-slate-300/50 rounded-xl shadow-lg px-6 py-4">
-          <h1 className="text-slate-900 font-semibold text-md">Statistic</h1>
+        <section className="bg-slate-300/50 rounded-xl shadow-lg px-6 py-4 mb-8 lg:mb-0">
+          <h1 className="hidden lg:block text-slate-900 font-semibold text-md">
+            Statistic
+          </h1>
 
-          <section className="mt-12 flex flex-col justify-center items-center">
-            <div className="size-32 rounded-full overflow-hidden shadow shadow-emerald-500">
+          <section className="lg:mt-12 mt-0 flex lg:flex-col flex-row justify-center items-center">
+            <div className="lg:size-32 size-16 rounded-full overflow-hidden shadow shadow-emerald-500">
               <img
                 className="block size-full object-cover"
                 src="/img/default-profile.jpg"
@@ -127,11 +129,11 @@ export default function Dashboard() {
               />
             </div>
 
-            <div className="mt-4 text-center">
-              <h1 className="font-semibold text-slate-900 text-lg">
+            <div className="mt-4 lg:text-center text-left ml-6 lg:ml-0">
+              <h1 className="font-semibold text-slate-900 lg:text-lg text-md">
                 Good Morning, Arjun Samudera!
               </h1>
-              <p className="mt-1 font-normal text-slate-500 text-xs">
+              <p className="mt-1 font-normal text-slate-500 text-[10px] lg:text-xs">
                 Lorem ipsum dolor sit, amet consectetur adipisicing.
               </p>
             </div>
