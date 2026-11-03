@@ -22,7 +22,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   const [isShowSidebar, setIsShowSidebar] = useState<boolean>(false);
 
   const handleToggleSidebar = () => {
-    setIsShowSidebar(false);
+    setIsShowSidebar(!isShowSidebar);
   };
 
   const handleToggleSidebarProfile = () => {
@@ -30,7 +30,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   };
   return (
     <>
-      <div className="relative flex w-full min-h-screen min-w-[1200px] bg-slate-200">
+      <div className="relative flex min-w-sm lg:w-full min-h-screen bg-slate-100 overflow-x-hidden">
         {isShowSidebar && (
           <button
             type="button"
@@ -133,7 +133,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             />
 
             <div
-              className={`block lg:hidden absolute right-0 top-16 z-50 w-1/2 px-4 pt-2 pb-8 rounded-lg bg-slate-100 shadow-lg transition-all duration-300 ${isShowSidebarProfile ? "translate-x-0" : "translate-x-full "}`}
+              className={`block lg:hidden absolute right-0 top-16 z-50 px-4 pt-2 pb-8 rounded-lg bg-slate-100 shadow-lg transition-all duration-300 ${isShowSidebarProfile ? "translate-x-0" : "translate-x-full"}`}
             >
               <ul className="flex flex-col gap-y-5">
                 <li className="flex items-center gap-x-4 cursor-pointer transition-all duration-150 hover:bg-slate-200/20 rounded-lg border-b-2 border-slate-200">
@@ -202,7 +202,9 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
           </nav>
-          <main className="py-4">{children}</main>
+          <main className="py-4 min-w-sm w-full overflow-x-hidden">
+            {children}
+          </main>
         </div>
       </div>
     </>

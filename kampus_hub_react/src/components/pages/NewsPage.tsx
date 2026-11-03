@@ -35,8 +35,7 @@ export default function NewsPage() {
   }, [primaryNews, otherNewsData]);
 
   return (
-    // <h1>test</h1>
-    <section className="rounded-lg bg-slate-100 p-6 overflow-y-auto">
+    <section className="rounded-lg p-6 overflow-y-auto overflow-x-hidden">
       <h1 className="font-semibold text-slate-900 text-lg mb-4">
         Pantau Berita Lagi Hangat
       </h1>

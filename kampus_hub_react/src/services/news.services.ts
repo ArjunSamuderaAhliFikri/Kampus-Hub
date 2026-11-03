@@ -9,7 +9,7 @@ async function retrieveNewsData() {
   };
 
   try {
-    const response = await fetch(`${BASE_URL}/post`, config);
+    const response = await fetch(`${BASE_URL}/posts`, config);
     const data = await response.json();
 
     return data;
