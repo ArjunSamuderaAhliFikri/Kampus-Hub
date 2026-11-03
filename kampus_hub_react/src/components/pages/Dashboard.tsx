@@ -8,10 +8,29 @@ import {
   UsersRound,
   Workflow,
 } from "lucide-react";
+import { useSearchAnythingContext } from "../../context/useSearchAnythingContext";
 
 export default function Dashboard() {
+  const { searchValue, setSearchValue } = useSearchAnythingContext();
+
   return (
-    <>
+    <section className="p-2 sm:p-4">
+      {searchValue.trim() && (
+        <section className="mb-4 bg-emerald-50 text-emerald-900 border border-emerald-200 px-4 py-3 rounded-lg flex items-center justify-between text-sm shadow-xs">
+          <div>
+            <span className="font-medium text-emerald-700">Pencarian aktif:</span>{" "}
+            <span className="font-semibold text-emerald-950">"{searchValue}"</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setSearchValue("")}
+            className="text-xs bg-emerald-600 text-white px-3 py-1 rounded hover:bg-emerald-700 cursor-pointer transition-colors"
+          >
+            Reset
+          </button>
+        </section>
+      )}
+
       <section className="lg:grid grid-cols-[1fr_350px] flex flex-col-reverse gap-x-4">
         <section className="flex flex-col gap-y-6">
           <section className="w-full h-52 bg-gradient-to-br from-emerald-700 to-emerald-500 rounded-lg px-6 py-4 text-slate-300">
@@ -142,7 +161,7 @@ export default function Dashboard() {
           </section>
         </section>
       </section>
-    </>
+    </section>
   );
 }
 

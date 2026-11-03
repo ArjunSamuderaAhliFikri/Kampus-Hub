@@ -9,13 +9,16 @@ import CollegePage from "./components/pages/CollegePage.tsx";
 import NewsPage from "./components/pages/NewsPage.tsx";
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { LayoutSearchAnythingProvider } from "./context/useSearchAnythingContext.tsx";
 
 const router = createBrowserRouter([
   {
     element: (
-      <MainLayout>
-        <Outlet />
-      </MainLayout>
+      <LayoutSearchAnythingProvider>
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      </LayoutSearchAnythingProvider>
     ),
     children: [
       {

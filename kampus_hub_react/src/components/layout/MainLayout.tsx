@@ -14,12 +14,15 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useSearchAnythingContext } from "../../context/useSearchAnythingContext";
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   const [isShowSidebarProfile, setIsShowSidebarProfile] =
     useState<boolean>(false);
 
   const [isShowSidebar, setIsShowSidebar] = useState<boolean>(false);
+
+  const { searchValue, setSearchValue } = useSearchAnythingContext();
 
   const handleToggleSidebar = () => {
     setIsShowSidebar(!isShowSidebar);
@@ -124,13 +127,27 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             >
               <Menu />
             </button>
-            <input
-              type="text"
-              name="search-anything"
-              id="search-anything"
-              placeholder="Search Anything"
-              className="bg-slate-100 px-4 py-2.5 w-full placeholder:text-xs rounded-full outline-none border border-slate-400/50 text-xs text-slate-600"
-            />
+            <div className="relative w-full">
+              <input
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                type="text"
+                name="search-anything"
+                id="search-anything"
+                placeholder="Search Anything..."
+                className="bg-slate-100 px-4 py-2.5 pr-8 w-full placeholder:text-xs rounded-full outline-none border border-slate-400/50 text-xs text-slate-600 focus:border-emerald-500 transition-all"
+              />
+              {searchValue && (
+                <button
+                  type="button"
+                  onClick={() => setSearchValue("")}
+                  aria-label="Hapus teks pencarian"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                >
+                  <X size={14} />
+                </button>
+              )}
+            </div>
 
             <div
               className={`block lg:hidden absolute right-0 top-16 z-50 px-4 pt-2 pb-8 rounded-lg bg-slate-100 shadow-lg transition-all duration-300 ${isShowSidebarProfile ? "translate-x-0" : "translate-x-full"}`}
