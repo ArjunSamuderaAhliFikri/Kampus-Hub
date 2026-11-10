@@ -10,6 +10,7 @@ import NewsPage from "./components/pages/NewsPage.tsx";
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { LayoutSearchAnythingProvider } from "./context/useSearchAnythingContext.tsx";
+import AddCollege from "./components/pages/AddCollege.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/mahasiswa",
         element: <CollegePage />,
+      },
+      {
+        path: "/mahasiswa/tambah-mahasiswa",
+        element: <AddCollege />,
       },
       {
         path: "*",
