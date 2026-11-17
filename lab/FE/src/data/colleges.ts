@@ -1,0 +1,173 @@
+/** @format */
+
+export interface College {
+  id: number;
+  name: string;
+  alamat: string;
+  semester: number;
+  ipk: number;
+  ips: number;
+}
+
+export const CollegeData: College[] = [
+  {
+    id: 1,
+    name: "Ahmad Fauzan",
+    alamat: "Jakarta Selatan",
+    semester: 2,
+    ipk: 3.72,
+    ips: 3.8,
+  },
+  {
+    id: 2,
+    name: "Siti Aisyah",
+    alamat: "Bandung",
+    semester: 4,
+    ipk: 3.85,
+    ips: 3.9,
+  },
+  {
+    id: 3,
+    name: "Budi Santoso",
+    alamat: "Depok",
+    semester: 6,
+    ipk: 3.45,
+    ips: 3.5,
+  },
+  {
+    id: 4,
+    name: "Citra Lestari",
+    alamat: "Bogor",
+    semester: 2,
+    ipk: 3.68,
+    ips: 3.75,
+  },
+  {
+    id: 5,
+    name: "Dimas Pratama",
+    alamat: "Tangerang",
+    semester: 8,
+    ipk: 3.25,
+    ips: 3.4,
+  },
+  {
+    id: 6,
+    name: "Eka Putri",
+    alamat: "Bekasi",
+    semester: 4,
+    ipk: 3.91,
+    ips: 3.95,
+  },
+  {
+    id: 7,
+    name: "Fajar Ramadhan",
+    alamat: "Jakarta Timur",
+    semester: 6,
+    ipk: 3.55,
+    ips: 3.6,
+  },
+  {
+    id: 8,
+    name: "Gina Maharani",
+    alamat: "Jakarta Barat",
+    semester: 2,
+    ipk: 3.78,
+    ips: 3.85,
+  },
+  {
+    id: 9,
+    name: "Hendra Wijaya",
+    alamat: "Semarang",
+    semester: 8,
+    ipk: 3.32,
+    ips: 3.45,
+  },
+  {
+    id: 10,
+    name: "Intan Permata",
+    alamat: "Yogyakarta",
+    semester: 4,
+    ipk: 3.88,
+    ips: 3.92,
+  },
+  {
+    id: 11,
+    name: "Joko Susanto",
+    alamat: "Surabaya",
+    semester: 6,
+    ipk: 3.47,
+    ips: 3.55,
+  },
+  {
+    id: 12,
+    name: "Kartika Sari",
+    alamat: "Malang",
+    semester: 2,
+    ipk: 3.76,
+    ips: 3.82,
+  },
+  {
+    id: 13,
+    name: "Lukman Hakim",
+    alamat: "Cirebon",
+    semester: 8,
+    ipk: 3.18,
+    ips: 3.3,
+  },
+  {
+    id: 14,
+    name: "Maya Anggraini",
+    alamat: "Sukabumi",
+    semester: 4,
+    ipk: 3.82,
+    ips: 3.88,
+  },
+  {
+    id: 15,
+    name: "Naufal Rizky",
+    alamat: "Jakarta Utara",
+    semester: 6,
+    ipk: 3.6,
+    ips: 3.65,
+  },
+  {
+    id: 16,
+    name: "Olivia Ananda",
+    alamat: "Tangerang Selatan",
+    semester: 2,
+    ipk: 3.94,
+    ips: 3.97,
+  },
+  {
+    id: 17,
+    name: "Putra Kurniawan",
+    alamat: "Karawang",
+    semester: 8,
+    ipk: 3.38,
+    ips: 3.42,
+  },
+  {
+    id: 18,
+    name: "Rina Wulandari",
+    alamat: "Purwakarta",
+    semester: 4,
+    ipk: 3.73,
+    ips: 3.8,
+  },
+  {
+    id: 19,
+    name: "Satria Nugraha",
+    alamat: "Tasikmalaya",
+    semester: 6,
+    ipk: 3.51,
+    ips: 3.58,
+  },
+  {
+    id: 20,
+    name: "Tiara Safitri",
+    alamat: "Jakarta Pusat",
+    semester: 8,
+    ipk: 3.89,
+    ips: 3.93,
+  },
+];

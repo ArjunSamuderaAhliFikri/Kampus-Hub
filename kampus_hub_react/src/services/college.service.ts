@@ -1,7 +1,7 @@
 import { ClientAPI } from "../../api/ApiClient";
 import type { ApiResponse, CollegeType } from "../types/CollegeType";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export function CollegeService() {
   const api = new ClientAPI(API_URL);

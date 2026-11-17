@@ -1,0 +1,64 @@
+/** @format */
+
+.table-container {
+  height: 70dvh;
+  overflow: auto;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  width: 100%;
+  box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  color: #f5f5f5;
+  text-align: left;
+}
+
+.styled-table th {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #009669;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #9999;
+}
+
+.styled-table tbody tr {
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: 0.15s all ease-in-out;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #3331;
+}
+
+.hamburger-menu-wrapper {
+  background-color: #3333;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}

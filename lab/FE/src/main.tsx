@@ -1,0 +1,59 @@
+/** @format */
+
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { MainLayout } from "./components/layout/MainLayout.tsx";
+import Dashboard from "./components/pages/Dashboard.tsx";
+import CollegePage from "./components/pages/CollegePage.tsx";
+import NewsPage from "./components/pages/NewsPage.tsx";
+
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { LayoutSearchAnythingProvider } from "./context/useSearchAnythingContext.tsx";
+import AddCollege from "./components/pages/AddCollege.tsx";
+import Login from "./components/pages/auth/Login.tsx";
+
+const router = createBrowserRouter([
+  {
+    element: (
+      <LayoutSearchAnythingProvider>
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      </LayoutSearchAnythingProvider>
+    ),
+    children: [
+      {
+        path: "/",
+        element: <Dashboard />,
+      },
+      {
+        path: "/berita",
+        element: <NewsPage />,
+      },
+      {
+        path: "/mahasiswa",
+        element: <CollegePage />,
+      },
+      {
+        path: "/mahasiswa/tambah-mahasiswa",
+        element: <AddCollege />,
+      },
+    ],
+  },
+
+  {
+    children: [
+      {
+        path: "/auth/login",
+        element: <Login />,
+      },
+    ],
+  },
+]);
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>,
+);

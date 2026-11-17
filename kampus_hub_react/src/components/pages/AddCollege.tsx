@@ -1,12 +1,8 @@
-import { useEffect, type Dispatch, type SetStateAction } from "react";
+import { type Dispatch, type SetStateAction } from "react";
 import { useCollegePresenter } from "../../presenter/useCollegePresenter";
 
 export default function AddCollege() {
   const { propertyCollege, actionCollege } = useCollegePresenter();
-
-  useEffect(() => {
-    console.log(propertyCollege);
-  }, [propertyCollege]);
 
   return (
     <>
