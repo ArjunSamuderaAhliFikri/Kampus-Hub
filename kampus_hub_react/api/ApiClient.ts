@@ -16,15 +16,42 @@ export class ClientAPI {
   ): Promise<T> {
     const BASE_URL = `${this.baseURL}${endpoint}`;
 
-    const headers = {
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+    const authHeaders: Record<string, string> = token
+      ? { Authorization: `Bearer ${token}` }
+      : {};
+
+    const headers: HeadersInit = {
       ...this.defaultHeaders,
-      ...options.headers,
+      ...authHeaders,
+      ...(options.headers as Record<string, string> | undefined),
     };
 
-    const response = await fetch(BASE_URL, { ...options, headers });
+    const response = await fetch(BASE_URL, {
+      ...options,
+      headers,
+      credentials: "include", // Mengizinkan pengiriman cookies antar-port
+    });
 
     if (!response.ok) {
-      throw new Error(`HTTP Error! Status: ${response.status}`);
+      let errorMessage = `HTTP Error! Status: ${response.status}`;
+      try {
+        const errorData = await response.json();
+        if (errorData) {
+          if (typeof errorData.message === "string") {
+            errorMessage = errorData.message;
+          } else if (typeof errorData.error === "string") {
+            errorMessage = errorData.error;
+          } else if (errorData.error && typeof errorData.error.message === "string") {
+            errorMessage = errorData.error.message;
+          }
+        }
+      } catch {
+        // Response bukan JSON
+      }
+
+      throw new Error(errorMessage);
     }
 
     return response.json() as Promise<T>;

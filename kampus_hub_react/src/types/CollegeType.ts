@@ -4,6 +4,8 @@ type CollegeType = {
   gender: string;
   address: string;
   faculty: string;
+  isActive?: boolean;
+  nim: string;
 };
 
 type ApiResponse<T> = {

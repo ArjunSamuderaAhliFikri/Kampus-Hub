@@ -13,6 +13,7 @@ export function useCollegePresenter() {
   const [inputGender, setInputGender] = useState<string>("");
   const [inputAddress, setInputAddress] = useState<string>("");
   const [inputFaculty, setInputFaculty] = useState<string>("");
+  const [inputNim, setInputNim] = useState<string>("");
 
   const { searchValue, setSearchValue } = useSearchAnythingContext();
 
@@ -41,6 +42,7 @@ export function useCollegePresenter() {
         gender: inputGender,
         address: inputAddress,
         faculty: inputFaculty,
+        nim: inputNim,
       };
 
       const result = await collegeService.createCollege(data);
@@ -73,6 +75,8 @@ export function useCollegePresenter() {
       setInputAddress,
       inputFaculty,
       setInputFaculty,
+      inputNim,
+      setInputNim,
     },
 
     actionCollege: {

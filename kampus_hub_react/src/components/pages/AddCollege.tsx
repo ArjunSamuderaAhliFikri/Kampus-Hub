@@ -43,6 +43,13 @@ export default function AddCollege() {
             type="text"
             placeholder="Masukkan Fakultas & Prodi"
           />
+          <InputForm
+            value={propertyCollege.inputNim}
+            onChange={propertyCollege.setInputNim}
+            label="NIM"
+            type="text"
+            placeholder="Masukkan NIM"
+          />
 
           <button
             onSubmit={actionCollege.handleAddCollege}

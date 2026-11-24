@@ -11,15 +11,21 @@ import NewsPage from "./components/pages/NewsPage.tsx";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { LayoutSearchAnythingProvider } from "./context/useSearchAnythingContext.tsx";
 import AddCollege from "./components/pages/AddCollege.tsx";
+import Login from "./components/pages/auth/Login.tsx";
+import Register from "./components/pages/auth/Register.tsx";
+import { AuthContextProvider } from "./context/useAuthContext.tsx";
+import AdminRoute from "./components/guards/AdminRoute.tsx";
 
 const router = createBrowserRouter([
   {
     element: (
-      <LayoutSearchAnythingProvider>
-        <MainLayout>
-          <Outlet />
-        </MainLayout>
-      </LayoutSearchAnythingProvider>
+      <AuthContextProvider>
+        <LayoutSearchAnythingProvider>
+          <MainLayout>
+            <Outlet />
+          </MainLayout>
+        </LayoutSearchAnythingProvider>
+      </AuthContextProvider>
     ),
     children: [
       {
@@ -36,15 +42,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/mahasiswa/tambah-mahasiswa",
-        element: <AddCollege />,
+        element: (
+          <AdminRoute>
+            <AddCollege />
+          </AdminRoute>
+        ),
+      },
+    ],
+  },
+
+  {
+    children: [
+      {
+        path: "/auth/login",
+        element: <Login />,
       },
       {
-        path: "*",
-        element: (
-          <div>
-            <h1>404 Page not found!</h1>
-          </div>
-        ),
+        path: "/auth/register",
+        element: <Register />,
       },
     ],
   },

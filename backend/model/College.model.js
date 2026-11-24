@@ -9,6 +9,7 @@ const CollegeSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    default: "",
   },
   gender: {
     type: String,
@@ -19,6 +20,14 @@ const CollegeSchema = new mongoose.Schema({
     required: true,
   },
   faculty: {
+    type: String,
+    required: true,
+  },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
+  nim: {
     type: String,
     required: true,
   },
