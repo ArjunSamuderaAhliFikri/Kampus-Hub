@@ -16,22 +16,15 @@ export class ClientAPI {
   ): Promise<T> {
     const BASE_URL = `${this.baseURL}${endpoint}`;
 
-    const token =
-      typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
-    const authHeaders: Record<string, string> = token
-      ? { Authorization: `Bearer ${token}` }
-      : {};
-
     const headers: HeadersInit = {
       ...this.defaultHeaders,
-      ...authHeaders,
       ...(options.headers as Record<string, string> | undefined),
     };
 
     const response = await fetch(BASE_URL, {
       ...options,
       headers,
-      credentials: "include", // Mengizinkan pengiriman cookies antar-port
+      credentials: "include", // Cookie httpOnly otomatis dikirim oleh browser
     });
 
     if (!response.ok) {

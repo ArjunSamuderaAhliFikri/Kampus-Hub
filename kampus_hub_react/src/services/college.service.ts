@@ -1,14 +1,11 @@
 import { ClientAPI } from "../../api/ApiClient";
-import { useAuthContext } from "../context/useAuthContext";
 import type { ApiResponse, CollegeType } from "../types/CollegeType";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export function CollegeService() {
-  const { accessToken } = useAuthContext();
-  const api = new ClientAPI(API_URL, {
-    Authorization: `Bearer ${accessToken}`,
-  });
+  // Tidak perlu menyertakan header manual, karena ClientAPI sudah mengirim httpOnly cookie via credentials: "include"
+  const api = new ClientAPI(API_URL);
 
   return {
     getCollege: () => api.get<ApiResponse<CollegeType[]>>("/college"),

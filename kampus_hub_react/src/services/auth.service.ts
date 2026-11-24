@@ -17,14 +17,10 @@ export function AuthService() {
     register: (body: RegisterRequest) =>
       api.post<AuthResponse<UserResponse>>("/auth/register", body),
     logout: () => api.post<AuthResponse<UserResponse>>("/auth/logout", {}),
-    refreshToken: (refreshToken?: string, userId?: string) =>
-      api.post<AuthResponse<UserResponse>>("/auth/refresh-token", {
-        refreshToken:
-          refreshToken ||
-          (typeof window !== "undefined"
-            ? localStorage.getItem("refreshToken")
-            : undefined),
-        userId,
-      }),
+    // Tidak perlu kirim token di body — cookie httpOnly dikirim otomatis oleh browser
+    refreshToken: () =>
+      api.post<AuthResponse<UserResponse>>("/auth/refresh-token", {}),
+    // Endpoint untuk cek siapa user yang sedang login
+    getMe: () => api.get<AuthResponse<UserResponse>>("/auth/me"),
   };
 }

@@ -15,11 +15,10 @@ type UserType = {
 };
 
 type AuthContextType = {
-  accessToken: string;
-  setAccessToken: React.Dispatch<SetStateAction<string>>;
   user: UserType | null;
   setUser: React.Dispatch<SetStateAction<UserType | null>>;
   isAdmin: boolean;
+  isLoading: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -29,8 +28,8 @@ export function AuthContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [accessToken, setAccessToken] = useState<string>("");
   const [user, setUser] = useState<UserType | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -39,49 +38,50 @@ export function AuthContextProvider({
   const isAdmin = user?.role === "admin";
 
   useEffect(() => {
-    const getRefreshAccessToken = async () => {
-      const storedRefreshToken = localStorage.getItem("refreshToken");
-
-      if (!storedRefreshToken) {
-        if (!pathname.includes("/auth")) {
-          navigate("/auth/login");
-        }
+    const checkAuth = async () => {
+      // Skip auth check on auth pages
+      if (pathname.includes("/auth")) {
+        setIsLoading(false);
         return;
       }
 
       try {
-        const res = await authService.refreshToken(storedRefreshToken);
-
-        if (res?.accessToken) {
-          setAccessToken(res.accessToken);
-          localStorage.setItem("accessToken", res.accessToken);
-        }
+        // 1. Coba langsung GET /auth/me (pakai access_token cookie)
+        const res = await authService.getMe();
 
         if (res?.user) {
           setUser(res.user);
-          localStorage.setItem("userRole", res.user.role);
+          setIsLoading(false);
+          return;
         }
-      } catch (error) {
-        console.error("Failed to refresh token:", error);
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("userRole");
-        setAccessToken("");
-        setUser(null);
-
-        if (!pathname.includes("/auth")) {
-          navigate("/auth/login");
-        }
+      } catch {
+        // Access token expired atau tidak ada — coba refresh
       }
+
+      try {
+        // 2. Access token expired → panggil refresh-token (pakai refresh_token cookie)
+        const refreshRes = await authService.refreshToken();
+
+        if (refreshRes?.user) {
+          setUser(refreshRes.user);
+          setIsLoading(false);
+          return;
+        }
+      } catch {
+        // Refresh token juga gagal — user harus login ulang
+      }
+
+      // 3. Semua gagal → redirect ke login
+      setUser(null);
+      setIsLoading(false);
+      navigate("/auth/login");
     };
 
-    getRefreshAccessToken();
+    checkAuth();
   }, [pathname]);
 
   return (
-    <AuthContext.Provider
-      value={{ accessToken, setAccessToken, user, setUser, isAdmin }}
-    >
+    <AuthContext.Provider value={{ user, setUser, isAdmin, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

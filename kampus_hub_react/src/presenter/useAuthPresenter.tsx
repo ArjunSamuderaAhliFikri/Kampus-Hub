@@ -33,22 +33,15 @@ export function useAuthPresenter() {
       }
 
       if (res?.user) {
-        if (res.accessToken) {
-          localStorage.setItem("accessToken", res.accessToken);
-        }
-        if (res.refreshToken) {
-          localStorage.setItem("refreshToken", res.refreshToken);
-        }
-        if (res.user.role) {
-          localStorage.setItem("userRole", res.user.role);
-        }
+        // Token sudah disimpan di httpOnly cookie oleh backend
+        // Tidak perlu localStorage sama sekali!
 
         setError("");
         setEnabledWarning(false);
         setIsLogin(true);
 
         alert(res.message);
-        navigate("/");
+        navigate("/"); // Redirect ke dashboard
       }
     } catch (err: unknown) {
       console.error("Error from login auth : ", err);
@@ -99,13 +92,16 @@ export function useAuthPresenter() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      // Panggil backend logout — backend akan clear cookies & hapus token dari DB
+      await authService.logout();
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+
     setUsername("");
     setPassword("");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("userRole");
-
     setIsLogin(false);
     navigate("/auth/login");
   };

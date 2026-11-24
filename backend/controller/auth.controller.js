@@ -5,6 +5,7 @@ const {
   generateAccessToken,
   generateRefreshToken,
   verifyRefreshToken,
+  verifyAccessToken,
 } = require("../utils/JWTToken");
 
 const register = async (req, res) => {
@@ -56,6 +57,7 @@ const login = async (req, res) => {
       });
     }
 
+    // 1. Cek apakah user adalah College (mahasiswa)
     const isValidCollege = await College.findOne({ username, password });
 
     let payload = null;
@@ -69,6 +71,7 @@ const login = async (req, res) => {
       };
       userDoc = isValidCollege;
     } else {
+      // 2. Jika bukan college, cek apakah user adalah Admin
       const isValidAdmin = await Admin.findOne({ username, password });
 
       if (isValidAdmin) {
@@ -91,6 +94,7 @@ const login = async (req, res) => {
     const accessToken = generateAccessToken(payload);
     const refreshToken = generateRefreshToken(payload);
 
+    // Simpan refresh token di database
     const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
     await RefreshToken.findOneAndUpdate(
       { userId: userDoc._id },
@@ -104,25 +108,29 @@ const login = async (req, res) => {
 
     const isProduction = process.env.NODE_ENV === "production";
 
+    // Simpan HANYA di httpOnly cookies — tidak dikirim di response body
     res.cookie("refresh_token", refreshToken, {
       httpOnly: true,
       secure: isProduction,
       sameSite: "lax",
-      maxAge: 30 * 24 * 60 * 60 * 1000,
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 hari
     });
 
     res.cookie("access_token", accessToken, {
       httpOnly: true,
       secure: isProduction,
       sameSite: "lax",
-      maxAge: 30 * 60 * 1000,
+      maxAge: 30 * 60 * 1000, // 30 menit
     });
 
+    console.log(
+      `=== LOGIN BERHASIL: ${payload.username} sebagai ${payload.role} ===`,
+    );
+
+    // Response hanya mengirim user info, BUKAN token
     return res.json({
       message: `Berhasil login sebagai ${payload.role}!`,
       user: payload,
-      accessToken,
-      refreshToken,
     });
   } catch (error) {
     console.error("Login Error:", error);
@@ -132,13 +140,11 @@ const login = async (req, res) => {
 
 const logout = async (req, res) => {
   try {
-    const token = req.body?.refreshToken || req.cookies?.refresh_token;
-    const userId = req.body?.userId;
+    // Ambil refresh token dari cookie saja
+    const token = req.cookies?.refresh_token;
 
     if (token) {
       await RefreshToken.deleteOne({ token });
-    } else if (userId) {
-      await RefreshToken.deleteOne({ userId });
     }
 
     res.clearCookie("access_token");
@@ -153,47 +159,33 @@ const logout = async (req, res) => {
 
 const refreshTokenHandler = async (req, res) => {
   try {
-    const incomingRefreshToken =
-      req.body?.refreshToken ||
-      req.cookies?.refresh_token ||
-      req.headers["x-refresh-token"];
+    // Refresh token HANYA dari httpOnly cookie
+    const incomingRefreshToken = req.cookies?.refresh_token;
 
-    const userId = req.body?.userId;
-
-    let tokenDoc = null;
-
-    if (incomingRefreshToken) {
-      const decoded = verifyRefreshToken(incomingRefreshToken);
-
-      tokenDoc = await RefreshToken.findOne({
-        token: incomingRefreshToken,
-        userId: decoded.userId,
-      });
-
-      if (!tokenDoc) {
-        return res.status(403).json({
-          error: "Forbidden",
-          message: "Refresh token tidak valid atau telah dicabut!",
-        });
-      }
-    } else if (userId) {
-      tokenDoc = await RefreshToken.findOne({ userId });
-
-      if (!tokenDoc) {
-        return res.status(403).json({
-          error: "Forbidden",
-          message: "Refresh token untuk user ini tidak ditemukan!",
-        });
-      }
-
-      verifyRefreshToken(tokenDoc.token);
-    } else {
+    if (!incomingRefreshToken) {
       return res.status(401).json({
         error: "Unauthorized",
-        message: "Refresh token atau User ID tidak ditemukan!",
+        message: "Refresh token tidak ditemukan!",
       });
     }
 
+    // 1. Verifikasi JWT signature
+    const decoded = verifyRefreshToken(incomingRefreshToken);
+
+    // 2. Cocokkan dengan database
+    const tokenDoc = await RefreshToken.findOne({
+      token: incomingRefreshToken,
+      userId: decoded.userId,
+    });
+
+    if (!tokenDoc) {
+      return res.status(403).json({
+        error: "Forbidden",
+        message: "Refresh token tidak valid atau telah dicabut!",
+      });
+    }
+
+    // 3. Cari user di College atau Admin
     let userDoc = await College.findById(tokenDoc.userId);
     let role = "mahasiswa";
 
@@ -209,7 +201,6 @@ const refreshTokenHandler = async (req, res) => {
       });
     }
 
-    // Untuk mahasiswa, cek isActive
     if (role === "mahasiswa" && !userDoc.isActive) {
       return res.status(403).json({
         error: "Forbidden",
@@ -235,18 +226,44 @@ const refreshTokenHandler = async (req, res) => {
 
     return res.json({
       message: "Token berhasil diperbarui!",
-      accessToken: newAccessToken,
       user: newPayload,
     });
   } catch (error) {
     console.error("Refresh Token Error:", error.message);
     return res.status(403).json({
-      error: {
-        name: error.name,
-        message: "Refresh token tidak valid atau sudah kadaluarsa!",
-      },
+      error: "Refresh token tidak valid atau sudah kadaluarsa!",
     });
   }
 };
 
-module.exports = { register, login, logout, refreshTokenHandler };
+// Endpoint GET /auth/me — cek siapa user yang sedang login via cookie
+const getMe = async (req, res) => {
+  try {
+    const accessToken = req.cookies?.access_token;
+
+    if (!accessToken) {
+      return res.status(401).json({
+        error: "Unauthorized",
+        message: "Belum login!",
+      });
+    }
+
+    const decoded = verifyAccessToken(accessToken);
+
+    return res.json({
+      user: {
+        userId: decoded.userId,
+        username: decoded.username,
+        role: decoded.role,
+      },
+    });
+  } catch (error) {
+    // Access token expired/invalid — frontend harus panggil refresh-token
+    return res.status(401).json({
+      error: "Unauthorized",
+      message: "Access token expired atau tidak valid!",
+    });
+  }
+};
+
+module.exports = { register, login, logout, refreshTokenHandler, getMe };
